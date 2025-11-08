@@ -38,34 +38,10 @@ vim.keymap.set('n', 'q', ':q<CR>', opt)
 vim.keymap.set('n', '<C-R>s', ':w<CR>', {noremap = true})
 vim.keymap.set('n', 'qq', ':q!<CR>', opt)
 
-local function clang_format_buffer()
-  local fname = vim.api.nvim_buf_get_name(0)
-  if fname == '' then
-    -- local ft = vim.bo.filetype
-    -- local assume = 'untitled.' .. (ft == '' and 'cpp' or ft)
-    -- vim.cmd('%!clang-format --assume-filename=' .. vim.fn.shellescape(assume) .. ' -style=file')
-    print('Please save file, or use <leader>F to format unsaved buffer')
-    return
-  else
-    -- saved: format in-place
-    vim.cmd('write')
-    vim.fn.system({
-      'E:\\LLVM\\bin\\clang-format.exe', 
-      '-style=file',
-      '-i', 
-      vim.api.nvim_buf_get_name(0)
-    })
-    vim.cmd('edit!')
-  end
-end
-
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = {"*.c","*.cpp","*.h","*.hpp"},
   callback = function() clang_format_buffer() end,
 })
-
-vim.keymap.set('n', '<F10>', clang_format_buffer, { noremap=true})
-
 
 -- INSERT
 vim.keymap.set('i', 'jk', '<ESC>', opt)
