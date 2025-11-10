@@ -1,3 +1,9 @@
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- optionally enable 24-bit colour
+vim.opt.termguicolors = true
 -- 设置默认文件格式为 Unix (LF)
 vim.opt.fileformat = "unix"
 
@@ -26,7 +32,6 @@ vim.opt.hlsearch = true          -- 高亮搜索
 vim.opt.incsearch = true         -- 增量搜索
 
 -- ================== LSP ==================
-
 
 -- ================== 其他便捷设置 ==================
 vim.opt.mouse = 'a'             -- 开启鼠标支持
